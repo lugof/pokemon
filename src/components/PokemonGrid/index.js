@@ -54,14 +54,14 @@ class PokemonGrid extends Component{
                                 <Image src={singlePoke.sprites.front_default} rounded/>
                                 <h5>Abilities:</h5>
                                     {singlePoke.abilities.map((ability)=>{
-                                        return( <p> + {ability.ability.name}</p>)
+                                        return( <p key={`ability-${ability.ability.name}`}> + {ability.ability.name}</p>)
                                     })}
                             </Col>
                             <Col md={4}>
                                 <Image src={singlePoke.sprites.back_default} rounded/>
                                 <h5>Types:</h5>
                                     {singlePoke.types.map((type)=>{
-                                        return( <p> + {type.type.name}</p>)
+                                        return( <p key={`pokemon-type-${type.type.name}`}> + {type.type.name}</p>)
                                     })}
                             </Col>
                             <Col md={4}>
