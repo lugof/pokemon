@@ -1,26 +1,21 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import MainPage from '../src/components/MainPage/index'
+import { Provider } from "react-redux"
+import {createStore, applyMiddleware} from 'redux'
+import { composeWithDevTools} from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
+import {pokeReducer } from './reducer/pokeReducer'
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      return (
+    <div>
+        <MainPage/>
     </div>
-  );
+)
 }
 
 export default App;

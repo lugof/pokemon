@@ -1,0 +1,7 @@
+.pokemonGrid-container{
+    margin-top:50px;
+    margin-bottom: 50px;
+    display:flex;
+    flex-wrap: wrap;
+    background-color: antiquewhite;
+}
