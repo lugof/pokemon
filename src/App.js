@@ -1,19 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import MainPage from '../src/components/MainPage/index'
-import { Provider } from "react-redux"
-import {createStore, applyMiddleware} from 'redux'
-import { composeWithDevTools} from 'redux-devtools-extension'
-import thunk from 'redux-thunk'
-import {pokeReducer } from './reducer/pokeReducer'
+import Container from '../src/components/Container/index'
+import {BrowserRouter as Router} from 'react-router-dom'
 
 
 
 function App() {
       return (
     <div>
-        <MainPage/>
+        <Router>
+        <React.Fragment >
+            <Container/>
+        </React.Fragment>
+
+        </Router>
+
     </div>
 )
 }

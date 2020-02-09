@@ -1,7 +1,7 @@
 import { Button, Modal } from 'react-bootstrap';
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
-import {fetchAll,fetchSingle} from '../../actions/actionCreator'
+import {fetchAll,fetchSingle,loading} from '../../actions/actionCreator'
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import Spinner from 'react-bootstrap/Spinner'
@@ -10,11 +10,13 @@ import PokemonGrid from '../PokemonGrid/index'
 
 class MainPage extends React.Component{
 
-    componentDidMount(){
-        const { fetchAllPoke }=this.props
-           fetchAllPoke(true);
-    }
-
+    /**
+     * Function to render the pokemonGrid component in case all info has been fetched
+     * @param {object} singlePoke poke moves to render, coming from api
+     * @param {array} allpokes all pokemon data to feed PokemonGrid props
+     * @param {function} fetchAllPoke redux function to fetch all pokemons and feed pokemonGrid
+     * @param {function} fetchSingle redux function to fetch pokemon moves
+     */
     chooseRender=()=>{
         const{ allPokes,fetchAllPoke,fetchSingle,singlePoke }=this.props
         if(allPokes===undefined || allPokes===null){
@@ -43,7 +45,8 @@ class MainPage extends React.Component{
  const mapStateToProps = state=> {
     return{
         allPokes: state.allpokes,
-        singlePoke: state.singlePoke
+        singlePoke: state.singlePoke,
+        isLoading:state.isLoading
     } ;   
 }
 
@@ -53,7 +56,8 @@ class MainPage extends React.Component{
  const mapDispatchToProps = dispatch=>{
     return{
         fetchAllPoke:(bool)=> dispatch(fetchAll(bool)),
-        fetchSingle: url=> dispatch(fetchSingle(url))
+        fetchSingle: url=> dispatch(fetchSingle(url)),
+        loading: bool=> dispatch(loading(bool))
     }
 }
 

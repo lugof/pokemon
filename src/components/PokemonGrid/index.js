@@ -12,6 +12,12 @@ class PokemonGrid extends Component{
             couldModalshow:false
         }
     }
+    /**
+     * ComponentDidUpdate checking if modal should render in case couldModalshow is true
+     * @param {object} prevProps component props from previous render
+     * @param {bool} couldModalshow conditional flag indicates if show modal can be set to true
+     * @param {object} singlePoke selected pokemon data to show on modal 
+     */
     componentDidUpdate(prevProps){
         const{ couldModalshow}=this.state
         const{ singlePoke}=this.props
@@ -21,11 +27,17 @@ class PokemonGrid extends Component{
         }
         return true
     }
-
+/**
+ * Function to set the first condition to show modal
+ * @param {bool} couldModalshow conditional flag to be checked by componentDidUpdate
+ */
     openModal=()=>{
         this.setState({couldModalshow:true})
     }
-
+/**
+ * Function to close modal
+ * @param {bool} showModal bool renders modal
+ */
     closeModal=()=>{
         this.setState({showModal:false})
     }
@@ -38,7 +50,7 @@ class PokemonGrid extends Component{
         <div className='pokemonGrid-container'>
        
             {allPokes && allPokes.length>0 && allPokes.map((poke)=>{
-                return(    <SinglePokemon pokeData={poke} key={`poke-${poke.name}`} fetchSingle={fetchSingle} openModal={this.openModal}/>)
+                return(    <SinglePokemon pokeData={poke} key={`poke-${poke.name}`} fetchSingle={fetchSingle} openModal={this.openModal} singlePoke={singlePoke}/>)
             
             })}
 

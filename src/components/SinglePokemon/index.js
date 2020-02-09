@@ -2,6 +2,8 @@ import {  Modal,Card,ListGroupItem,ListGroup } from 'react-bootstrap';
 import React, { Component } from 'react';
 import './style.css'
 import Button from 'react-bootstrap/Button'
+import { withRouter} from "react-router-dom"
+
 
 class SinglePokemon extends Component{
     constructor(props){
@@ -10,13 +12,30 @@ class SinglePokemon extends Component{
             active:false
         }
     }
-
+/**
+ * Function to fetch card data and set the first modal flag to open
+     * @param {object} pokeData poke data to render, coming from api
+     * @param {array} allpokes all pokemons data 
+     * @param {function} fetchSingle redux function to fetch pokemon moves
+ */
     getSinglePokeData= ()=>{
         const{ pokeData,fetchSingle,openModal }=this.props
           fetchSingle(pokeData.url)
          openModal();
+         
     }
-
+/**
+ * Function to obtain selected pokemon Id for router redirection
+ * @param {object} pokeData pokemon individual data
+ */
+    fullInfo=async () =>{
+        const { pokeData}=this.props
+        const poke= await fetch(pokeData.url)
+        const poke1 = await poke.json();
+        this.props.history.push({
+            pathname: `/fullInfo/${poke1.id}`
+          })
+    }
     render(){
         const{pokeData}=this.props
         return(
@@ -29,7 +48,8 @@ class SinglePokemon extends Component{
                     <Card.Text>
                         Click the button below to find more info about {pokeData.name}
                     </Card.Text>
-                    <Button onClick={this.getSinglePokeData} variant={'success'} type={'submit'}> More info... </Button>
+                    <Button className={'description-button'} onClick={this.getSinglePokeData} variant={'success'} type={'submit'} size={'sm'}>Description</Button>
+                    <Button className={'full-info--button'} onClick={this.fullInfo} variant={'primary'} type={'submit'} size={'sm'}>Pokemon Moves</Button>
                 </Card.Body>
                 </Card>
                 </div>
@@ -38,4 +58,4 @@ class SinglePokemon extends Component{
     }
 }
 
-export default SinglePokemon
+export default withRouter(SinglePokemon)
